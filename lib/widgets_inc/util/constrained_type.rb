@@ -17,11 +17,11 @@ module WidgetsInc
         def create_string_option
           -> (field_name, max_length, value) do
             schema = Dry::Schema.Params do
-              required(:value).filled(:string, max_size?: max_length)
+              required(:value).maybe(:string, max_size?: max_length)
             end
 
             validate_schema.(schema, field_name, value)
-              .fmap { |r| Some(r) }
+              .fmap { |r| Maybe(r) }
           end
         end
 

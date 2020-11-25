@@ -11,7 +11,6 @@ module WidgetsInc
     UnitQuantity = Types::Strict::Integer
     KilogramQuantity = Types::Strict::Float
     Price = Types::Strict::Float
-    ZipCode = Types::Strict::String
     BillingAmount = Types::Strict::Float
 
     OrderQuantity = UnitQuantity | KilogramQuantity

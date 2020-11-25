@@ -1,9 +1,9 @@
 module WidgetsInc
   module Types
-    module EmailAddress
+    module ZipCode
       class << self
         def type
-          WidgetsInc::Types::Strict::String.constrained(format: pattern, filled: true)
+          ::WidgetsInc::Types::Strict::String.constrained(format: pattern, filled: true)
         end
 
         def create(field_name)
@@ -15,7 +15,7 @@ module WidgetsInc
         private
 
         def pattern
-          /.+@.+/
+          /\d{5}/
         end
       end
     end
