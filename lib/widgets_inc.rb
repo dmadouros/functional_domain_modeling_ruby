@@ -95,18 +95,32 @@ module WidgetsInc
     end
   end
 
+  def self.to_product_code
+    ->(check_product_code_exists, product_code) do
+
+      check_product = -> (product_code) {
+        if check_product_code_exists.(product_code)
+          Success(product_code)
+        else
+          Falure("Invalid: #{product_code}")
+        end
+      }
+
+      product_code
+        .then(&Types::ProductCode.create(:product_code))
+        .bind(&check_product)
+    end
+  end
+
   def self.to_validated_order_line
     -> (check_product_code_exists, unvalidated_order_line) do
       call do
         order_line_id = bind unvalidated_order_line.order_line_id
           .then(&Types::OrderLineId.create(:order_line_id))
-
         product_code = bind unvalidated_order_line.product_code
-          .then(&Types::ProductCode.create(:product_code))
-
-        to_quantity = -> (value) { Types::OrderQuantity.create(:quantity).(product_code, value) }
+          .then(&->(product_code) { to_product_code.(check_product_code_exists, product_code) })
         quantity = bind unvalidated_order_line.quantity
-          .then(&to_quantity)
+          .then(&-> (value) { Types::OrderQuantity.create(:quantity).(product_code, value) })
 
         validated_order_line = ::WidgetsInc::Types::ValidatedOrderLine.new(
           order_line_id: order_line_id,
@@ -127,13 +141,10 @@ module WidgetsInc
 
         order_id = bind unvalidated_order.order_id
           .then(&Types::OrderId.create(:order_id))
-
         customer_info = bind unvalidated_order.customer_info
           .then(&to_customer_info)
-
         shipping_address = bind unvalidated_order.shipping_address
           .then(&to_address_local)
-
         billing_address = bind unvalidated_order.billing_address
           .then(&to_address_local)
 

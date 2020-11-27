@@ -29,7 +29,7 @@ RSpec.describe WidgetsInc do
   end
 
   let(:check_product_code_exists) do
-    ->() { true }
+    ->(_product_code) { true }
   end
 
   describe ".to_customer_info" do
