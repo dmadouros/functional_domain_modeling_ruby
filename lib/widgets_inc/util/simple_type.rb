@@ -11,6 +11,13 @@ module WidgetsInc
         }
       end
 
+      def value(instance)
+        case instance
+        in self
+          instance.instance_variable_get(:@value)
+        end
+      end
+
       private
 
       instance_eval { private :new }

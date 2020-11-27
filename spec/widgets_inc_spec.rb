@@ -32,6 +32,43 @@ RSpec.describe WidgetsInc do
     ->(_product_code) { true }
   end
 
+  let(:billing_address) do
+    ::WidgetsInc::Types::UnvalidatedAddress.new(
+      address_line_1: "4321 Pine St.",
+      address_line_2: nil,
+      address_line_3: nil,
+      address_line_4: nil,
+      city: "AnotherCity",
+      zip_code: "67890",
+    )
+  end
+
+  let(:unvalidated_order_line_1) do
+    ::WidgetsInc::Types::UnvalidatedOrderLine.new(
+      order_line_id: "1",
+      product_code: "W7639",
+      quantity: 10
+    )
+  end
+
+  let(:unvalidated_order_line_2) do
+    ::WidgetsInc::Types::UnvalidatedOrderLine.new(
+      order_line_id: "2",
+      product_code: "G6548",
+      quantity: 14.2
+    )
+  end
+
+  let(:unvalidated_order) do
+    ::WidgetsInc::Types::UnvalidatedOrder.new(
+      order_id: "987654321",
+      customer_info: unvalidated_customer_info,
+      shipping_address: unvalidated_address,
+      billing_address: billing_address,
+      lines: [unvalidated_order_line_1, unvalidated_order_line_2]
+    )
+  end
+
   describe ".to_customer_info" do
     context "when all fields valid" do
       it "returns customer_info result" do
@@ -98,54 +135,17 @@ RSpec.describe WidgetsInc do
   end
 
   describe ".validate_order" do
-    let(:billing_address) do
-      ::WidgetsInc::Types::UnvalidatedAddress.new(
-        address_line_1: "4321 Pine St.",
-        address_line_2: nil,
-        address_line_3: nil,
-        address_line_4: nil,
-        city: "AnotherCity",
-        zip_code: "67890",
-      )
-    end
-
-    let(:unvalidated_order_line_1) do
-      ::WidgetsInc::Types::UnvalidatedOrderLine.new(
-        order_line_id: "1",
-        product_code: "W7639",
-        quantity: 10
-      )
-    end
-
-    let(:unvalidated_order_line_2) do
-      ::WidgetsInc::Types::UnvalidatedOrderLine.new(
-        order_line_id: "2",
-        product_code: "G6548",
-        quantity: 14.2
-      )
-    end
-
-    let(:unvalidated_order) do
-      ::WidgetsInc::Types::UnvalidatedOrder.new(
-        order_id: "987654321",
-        customer_info: unvalidated_customer_info,
-        shipping_address: unvalidated_address,
-        billing_address: billing_address,
-        lines: [unvalidated_order_line_1, unvalidated_order_line_2]
-      )
-    end
-
     context "when all fields valid" do
       it "returns validated_order result" do
-        actual = WidgetsInc.validate_order.(check_product_code_exists, check_address_exists, unvalidated_order)
+        actual = unvalidated_order.then(&WidgetsInc.validate_order(check_product_code_exists, check_address_exists))
 
-        personal_name = ::WidgetsInc::Types::PersonalName.new(
+        expected_personal_name = ::WidgetsInc::Types::PersonalName.new(
           first_name: ::WidgetsInc::Types::String50.create_unsafe(:first_name).("Bilbo"),
           last_name: ::WidgetsInc::Types::String50.create_unsafe(:last_name).("Baggins"),
         )
 
         expected_customer_info = ::WidgetsInc::Types::CustomerInfo.new(
-          name: personal_name,
+          name: expected_personal_name,
           email_address: ::WidgetsInc::Types::EmailAddress.create_unsafe(:email_address).("bilbo.baggins@example.com"),
         )
 
@@ -188,6 +188,24 @@ RSpec.describe WidgetsInc do
         )
 
         expect(actual).to eq(Success(expected))
+      end
+    end
+  end
+
+  describe ".place_order" do
+    context "when all fields valid" do
+      it "returns list of events" do
+        get_product_price = ->(product_code) { ::WidgetsInc::Types::Price.create_unsafe(:price).(1.0) }
+        create_order_acknowledgement_order = nil
+        send_order_acknowledgement = nil
+
+        actual = unvalidated_order.then(&::WidgetsInc.place_order(
+          check_product_code_exists,
+          check_address_exists,
+          get_product_price,
+          create_order_acknowledgement_order,
+          send_order_acknowledgement
+        ))
       end
     end
   end
