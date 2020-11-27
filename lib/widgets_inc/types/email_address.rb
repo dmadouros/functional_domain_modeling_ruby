@@ -1,21 +1,12 @@
 module WidgetsInc
   module Types
-    module EmailAddress
+    class EmailAddress < ::WidgetsInc::SimpleType
       class << self
-        def type
-          WidgetsInc::Types::Strict::String.constrained(format: pattern, filled: true)
-        end
-
         def create(field_name)
           -> (value) do
-            ::WidgetsInc::Util::ConstrainedType.create_like.(field_name, pattern, value)
+            ::WidgetsInc::Util::ConstrainedType.create_like.(field_name, /.+@.+/, value)
+              .fmap { |value| new(value: value) }
           end
-        end
-
-        private
-
-        def pattern
-          /.+@.+/
         end
       end
     end

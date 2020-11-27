@@ -7,6 +7,7 @@ require "dry-schema"
 require "widgets_inc/version"
 
 require "widgets_inc/util/constrained_type"
+require "widgets_inc/util/simple_type"
 
 require "widgets_inc/types"
 require "widgets_inc/types/unvalidated_customer_info"
@@ -17,12 +18,25 @@ require "widgets_inc/types/customer_info"
 require "widgets_inc/types/unvalidated_address"
 require "widgets_inc/types/zip_code"
 require "widgets_inc/types/address"
+require "widgets_inc/types/unvalidated_order_line"
+require "widgets_inc/types/unvalidated_order"
+require "widgets_inc/types/order_line_id"
+require "widgets_inc/types/unit_quantity"
+require "widgets_inc/types/kilogram_quantity"
+require "widgets_inc/types/order_quantity"
+require "widgets_inc/types/gizmo_code"
+require "widgets_inc/types/widget_code"
+require "widgets_inc/types/product_code"
+require "widgets_inc/types/order_line_id"
+require "widgets_inc/types/validated_order_line"
+require "widgets_inc/types/order_id"
+require "widgets_inc/types/validated_order"
 
 Dry::Schema.load_extensions(:monads)
 
 module WidgetsInc
   extend ::Dry::Monads::Do::Mixin
-  extend ::Dry::Monads[:result]
+  extend ::Dry::Monads[:result, :list]
 
   def self.to_customer_info
     -> (unvalidated_customer_info) {
@@ -77,6 +91,63 @@ module WidgetsInc
         )
 
         Success(address)
+      end
+    end
+  end
+
+  def self.to_validated_order_line
+    -> (check_product_code_exists, unvalidated_order_line) do
+      call do
+        order_line_id = bind unvalidated_order_line.order_line_id
+          .then(&Types::OrderLineId.create(:order_line_id))
+
+        product_code = bind unvalidated_order_line.product_code
+          .then(&Types::ProductCode.create(:product_code))
+
+        to_quantity = -> (value) { Types::OrderQuantity.create(:quantity).(product_code, value) }
+        quantity = bind unvalidated_order_line.quantity
+          .then(&to_quantity)
+
+        validated_order_line = ::WidgetsInc::Types::ValidatedOrderLine.new(
+          order_line_id: order_line_id,
+          product_code: product_code,
+          quantity: quantity,
+        )
+
+        Success(validated_order_line)
+      end
+    end
+  end
+
+  def self.validate_order
+    -> (check_product_code_exists, check_address_exists, unvalidated_order) do
+      call do
+        to_address_local = -> (unvalidated_address) { to_address.(check_address_exists, unvalidated_address) }
+        to_validated_order_line_local = -> (unvalidated_order_line) { to_validated_order_line.(check_product_code_exists, unvalidated_order_line) }
+
+        order_id = bind unvalidated_order.order_id
+          .then(&Types::OrderId.create(:order_id))
+
+        customer_info = bind unvalidated_order.customer_info
+          .then(&to_customer_info)
+
+        shipping_address = bind unvalidated_order.shipping_address
+          .then(&to_address_local)
+
+        billing_address = bind unvalidated_order.billing_address
+          .then(&to_address_local)
+
+        lines = bind ::Dry::Monads::List[*unvalidated_order.lines.map(&to_validated_order_line_local)].typed(::Dry::Monads::Result).traverse
+
+        validated_order = Types::ValidatedOrder.new(
+          order_id: order_id,
+          customer_info: customer_info,
+          shipping_address: shipping_address,
+          billing_address: billing_address,
+          lines: lines.value,
+        )
+
+        Success(validated_order)
       end
     end
   end

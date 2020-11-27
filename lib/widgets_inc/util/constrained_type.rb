@@ -25,7 +25,6 @@ module WidgetsInc
           end
         end
 
-
         def create_like
           -> (field_name, pattern, value) do
             schema = Dry::Schema.Params do
@@ -36,7 +35,25 @@ module WidgetsInc
           end
         end
 
-        private
+        def create_int
+          -> (field_name, min, max, value) do
+            schema = Dry::Schema.Params do
+              required(:value).filled(:int?, gteq?: min, lteq?: max)
+            end
+
+            validate_schema.(schema, field_name, value)
+          end
+        end
+
+        def create_float
+          -> (field_name, min, max, value) do
+            schema = Dry::Schema.Params do
+              required(:value).filled(:float?, gteq?: min, lteq?: max)
+            end
+
+            validate_schema.(schema, field_name, value)
+          end
+        end
 
         def validate_schema
           -> (schema, field_name, value) do

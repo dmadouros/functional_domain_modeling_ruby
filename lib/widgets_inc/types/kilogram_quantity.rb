@@ -1,10 +1,10 @@
 module WidgetsInc
   module Types
-    class ZipCode < ::WidgetsInc::SimpleType
+    class KilogramQuantity < ::WidgetsInc::SimpleType
       class << self
         def create(field_name)
           -> (value) do
-            ::WidgetsInc::Util::ConstrainedType.create_like.(field_name, /\d{5}/, value)
+            ::WidgetsInc::Util::ConstrainedType.create_float.(field_name, 0.5, 100.0, value)
               .fmap { |value| new(value: value) }
           end
         end

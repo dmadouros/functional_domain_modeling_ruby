@@ -1,8 +1,8 @@
 module WidgetsInc
   module Types
     class PersonalName < ::Dry::Struct
-      attribute :first_name, String50.type
-      attribute :last_name, String50.type
+      attribute :first_name, Types.Instance(String50)
+      attribute :last_name, Types.Instance(String50)
     end
   end
 end
