@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 module WidgetsInc
   module Types
     class PricedOrderLine < ::Dry::Struct

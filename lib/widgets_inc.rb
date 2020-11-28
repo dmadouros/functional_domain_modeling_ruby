@@ -4,6 +4,7 @@ require "dry-struct"
 require "dry-monads"
 require "dry/monads/do"
 require "dry-schema"
+require "sorbet-runtime"
 
 require "widgets_inc/version"
 

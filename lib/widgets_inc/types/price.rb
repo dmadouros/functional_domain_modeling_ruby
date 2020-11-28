@@ -1,8 +1,11 @@
-# typed: true
+# typed: strict
 module WidgetsInc
   module Types
     class Price < ::WidgetsInc::SimpleType
       class << self
+      extend T::Sig
+
+        sig {params(field_name: Symbol).returns(T.proc.params(value: Float).returns(Price))}
         def create(field_name)
           -> (value) {
             ::WidgetsInc::Util::ConstrainedType.create_float.(field_name, 0.0, 1000.0, value)
@@ -10,6 +13,7 @@ module WidgetsInc
           }
         end
 
+        sig {params(quantity: T.any(Float, Integer)).returns(T.proc.params(price: Price).returns(Price))}
         def multiply(quantity)
           -> (price) {
             case price

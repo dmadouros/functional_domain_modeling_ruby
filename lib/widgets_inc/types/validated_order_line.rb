@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 module WidgetsInc
   module Types
     class ValidatedOrderLine < ::Dry::Struct
