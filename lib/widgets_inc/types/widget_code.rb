@@ -1,3 +1,4 @@
+# typed: false
 module WidgetsInc
   module Types
     class WidgetCode < ::WidgetsInc::SimpleType

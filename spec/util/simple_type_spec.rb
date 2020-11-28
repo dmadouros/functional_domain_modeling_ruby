@@ -1,3 +1,4 @@
+# typed: ignore
 module WidgetsInc
   module Util
     RSpec.describe SimpleType do

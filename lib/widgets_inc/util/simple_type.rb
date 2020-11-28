@@ -1,3 +1,4 @@
+# typed: ignore
 module WidgetsInc
   class SimpleType
     class << self

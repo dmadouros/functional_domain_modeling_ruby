@@ -1,3 +1,4 @@
+# typed: ignore
 Dry::Types.load_extensions(:maybe)
 
 module WidgetsInc

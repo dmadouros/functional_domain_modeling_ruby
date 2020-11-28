@@ -30,9 +30,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-struct"
   spec.add_dependency "dry-monads"
   spec.add_dependency "dry-schema"
+  spec.add_dependency "sorbet-runtime"
 
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "amazing_print"
   spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "sorbet"
 end

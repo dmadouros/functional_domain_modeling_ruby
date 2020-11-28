@@ -1,3 +1,4 @@
+# typed: false
 RSpec.describe WidgetsInc do
   include ::Dry::Monads[:result, :maybe]
 

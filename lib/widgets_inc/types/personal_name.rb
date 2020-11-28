@@ -1,3 +1,4 @@
+# typed: strict
 module WidgetsInc
   module Types
     class PersonalName < ::Dry::Struct

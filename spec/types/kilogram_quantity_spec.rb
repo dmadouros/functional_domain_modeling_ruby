@@ -1,3 +1,4 @@
+# typed: ignore
 module WidgetsInc
   module Types
     RSpec.describe KilogramQuantity do

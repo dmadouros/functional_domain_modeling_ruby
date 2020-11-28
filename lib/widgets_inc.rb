@@ -1,3 +1,4 @@
+# typed: ignore
 require "dry-types"
 require "dry-struct"
 require "dry-monads"

@@ -1,3 +1,4 @@
+# typed: ignore
 module WidgetsInc
   module Types
     module OrderQuantity

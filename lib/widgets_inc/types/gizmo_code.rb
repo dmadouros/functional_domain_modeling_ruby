@@ -1,3 +1,4 @@
+# typed: false
 module WidgetsInc
   module Types
     class GizmoCode < ::WidgetsInc::SimpleType

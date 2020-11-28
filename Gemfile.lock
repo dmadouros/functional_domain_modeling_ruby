@@ -5,6 +5,7 @@ PATH
       dry-monads
       dry-schema
       dry-struct
+      sorbet-runtime
 
 GEM
   remote: https://rubygems.org/
@@ -81,6 +82,10 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.3)
+    sorbet (0.5.6111)
+      sorbet-static (= 0.5.6111)
+    sorbet-runtime (0.5.6111)
+    sorbet-static (0.5.6111-universal-darwin-14)
 
 PLATFORMS
   ruby
@@ -91,6 +96,7 @@ DEPENDENCIES
   rake (~> 12.0)
   rspec (~> 3.0)
   simplecov
+  sorbet
   widgets_inc!
 
 BUNDLED WITH
