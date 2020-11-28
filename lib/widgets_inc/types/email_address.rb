@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 module WidgetsInc
   module Types
     class EmailAddress < ::WidgetsInc::SimpleType

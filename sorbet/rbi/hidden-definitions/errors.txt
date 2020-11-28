@@ -2903,28 +2903,28 @@
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Revision_R
 #                RDoc::RD::BlockParser::Racc_Runtime_Revision
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Version
-#                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_R
+#                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Version
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Id_C
 # uninitialized constant RDoc::RD::BlockParser::Racc_Runtime_Core_Revision_C
 # Did you mean?  RDoc::RD::BlockParser::Racc_Runtime_Core_Revision_R
 #                RDoc::RD::BlockParser::Racc_Runtime_Revision
-#                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_R
+#                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Version
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Id_C
 # uninitialized constant RDoc::RD::BlockParser::Racc_Runtime_Core_Revision_R
 # Did you mean?  RDoc::RD::BlockParser::Racc_Runtime_Core_Revision_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Revision
-#                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_R
+#                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Version
 # uninitialized constant RDoc::RD::BlockParser::Racc_Runtime_Core_Version
 # Did you mean?  RDoc::RD::BlockParser::Racc_Runtime_Revision
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Revision
-#                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_R
+#                RDoc::RD::BlockParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Revision_C
 #                RDoc::RD::BlockParser::Racc_Runtime_Core_Revision_R
 #                RDoc::RD::BlockParser::Racc_Runtime_Version
@@ -2963,28 +2963,28 @@
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Revision_R
 #                RDoc::RD::InlineParser::Racc_Runtime_Revision
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Version
-#                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_R
+#                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Version
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Id_C
 # uninitialized constant RDoc::RD::InlineParser::Racc_Runtime_Core_Revision_C
 # Did you mean?  RDoc::RD::InlineParser::Racc_Runtime_Core_Revision_R
 #                RDoc::RD::InlineParser::Racc_Runtime_Revision
-#                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_R
+#                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Version
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Id_C
 # uninitialized constant RDoc::RD::InlineParser::Racc_Runtime_Core_Revision_R
 # Did you mean?  RDoc::RD::InlineParser::Racc_Runtime_Core_Revision_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Revision
-#                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_R
+#                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Version
 # uninitialized constant RDoc::RD::InlineParser::Racc_Runtime_Core_Version
 # Did you mean?  RDoc::RD::InlineParser::Racc_Runtime_Revision
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Revision
-#                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_R
+#                RDoc::RD::InlineParser::Racc_Runtime_Core_Version_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Revision_C
 #                RDoc::RD::InlineParser::Racc_Runtime_Core_Revision_R
 #                RDoc::RD::InlineParser::Racc_Runtime_Version
@@ -4247,10 +4247,6 @@
 # wrong constant name []
 # wrong constant name []=
 # wrong constant name initialize
-# wrong constant name ==
-# wrong constant name deconstruct_keys
-# wrong constant name initialize
-# wrong constant name value
 # uninitialized constant WidgetsInc::Types::Address::EMPTY_ARRAY
 # uninitialized constant WidgetsInc::Types::Address::EMPTY_HASH
 # uninitialized constant WidgetsInc::Types::Address::EMPTY_OPTS
@@ -4432,3 +4428,9 @@
 # wrong constant name create_events
 # wrong constant name place_order
 # wrong constant name price_order
+# wrong constant name to_address
+# wrong constant name to_customer_info
+# wrong constant name to_priced_order_line
+# wrong constant name to_product_code
+# wrong constant name to_validated_order_line
+# wrong constant name validate_order

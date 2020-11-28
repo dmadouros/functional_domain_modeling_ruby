@@ -5,9 +5,6 @@
 module T::CompatibilityPatches::RSpecCompatibility::MethodDoubleExtensions; end
 module T::CompatibilityPatches::RSpecCompatibility::RecorderExtensions; end
 module WidgetsInc::Types::Array; end
-module WidgetsInc::Types::OrderQuantity; end
-module WidgetsInc::Types::Price; end
-module WidgetsInc::Types::PricedOrderLine::Price; end
 module WidgetsInc::Types::Strict::Float; end
 module WidgetsInc::Types::Strict::Integer; end
 module WidgetsInc::Types::Strict::String; end

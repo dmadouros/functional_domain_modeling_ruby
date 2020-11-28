@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: true
 module WidgetsInc
   module Types
     class Price < ::WidgetsInc::SimpleType
@@ -13,8 +13,8 @@ module WidgetsInc
         def multiply(quantity)
           -> (price) {
             case price
-            in ::WidgetsInc::Types::Price(value:)
-              create_unsafe(:line_price).(quantity * value)
+            when ::WidgetsInc::Types::Price
+              create_unsafe(:line_price).(quantity * ::WidgetsInc::Types::Price.value(price))
             end
           }
         end

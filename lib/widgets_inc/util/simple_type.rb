@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: true
 module WidgetsInc
   class SimpleType
     class << self
@@ -14,7 +14,7 @@ module WidgetsInc
 
       def value(instance)
         case instance
-        in self
+        when self
           instance.instance_variable_get(:@value)
         end
       end

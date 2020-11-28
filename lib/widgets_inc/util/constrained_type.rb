@@ -1,13 +1,14 @@
-# typed: ignore
+# typed: false
 module WidgetsInc
   module Util
     module ConstrainedType
-      extend ::Dry::Monads[:result, :maybe]
+      extend ::Dry::Monads::Result::Mixin
+      extend ::Dry::Monads::Maybe::Mixin
 
       class << self
         def create_string
           -> (field_name, max_length, value) do
-            schema = Dry::Schema.Params do
+            schema = Dry::Schema.define do
               required(:value).filled(:string, max_size?: max_length)
             end
 
@@ -17,7 +18,7 @@ module WidgetsInc
 
         def create_string_option
           -> (field_name, max_length, value) do
-            schema = Dry::Schema.Params do
+            schema = Dry::Schema.define do
               required(:value).maybe(:string, max_size?: max_length)
             end
 
@@ -28,7 +29,7 @@ module WidgetsInc
 
         def create_like
           -> (field_name, pattern, value) do
-            schema = Dry::Schema.Params do
+            schema = Dry::Schema.define do
               required(:value).filled(:string, format?: pattern)
             end
 
@@ -38,7 +39,7 @@ module WidgetsInc
 
         def create_int
           -> (field_name, min, max, value) do
-            schema = Dry::Schema.Params do
+            schema = Dry::Schema.define do
               required(:value).filled(:int?, gteq?: min, lteq?: max)
             end
 
@@ -48,7 +49,7 @@ module WidgetsInc
 
         def create_float
           -> (field_name, min, max, value) do
-            schema = Dry::Schema.Params do
+            schema = Dry::Schema.define do
               required(:value).filled(:float?, gteq?: min, lteq?: max)
             end
 

@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 module WidgetsInc
   module Types
     class String50 < ::WidgetsInc::SimpleType

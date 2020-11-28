@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: true
 module WidgetsInc
   module Types
     module OrderQuantity
@@ -10,9 +10,9 @@ module WidgetsInc
         def create(field_name)
           -> (product_code, value) do
             case product_code
-            in ::WidgetsInc::Types::GizmoCode
+            when ::WidgetsInc::Types::GizmoCode
               KilogramQuantity.create(field_name).(value)
-            in ::WidgetsInc::Types::WidgetCode
+            when ::WidgetsInc::Types::WidgetCode
               UnitQuantity.create(field_name).(value)
             end
           end

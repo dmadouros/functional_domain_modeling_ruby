@@ -7996,16 +7996,6 @@ class WeakRef
   RUBYGEMS_ACTIVATION_MONITOR = ::T.let(nil, ::T.untyped)
 end
 
-class WidgetsInc::SimpleType
-  def ==(other); end
-
-  def deconstruct_keys(_); end
-
-  def initialize(value:); end
-
-  def value(); end
-end
-
 class WidgetsInc::Types::Address
   def address_line_1(); end
 
@@ -8167,14 +8157,8 @@ module WidgetsInc::Types
   extend ::Dry::Core::Deprecations::Interface
 end
 
-module WidgetsInc::Util::ConstrainedType
-  extend ::Dry::Monads::Result::Mixin
-  extend ::Dry::Monads::Result::Mixin::Constructors
-  extend ::Dry::Monads::Maybe::Mixin
-  extend ::Dry::Monads::Maybe::Mixin::Constructors
-end
-
 module WidgetsInc
+  extend ::Dry::Monads::Do::Mixin
   extend ::Dry::Monads::Result::Mixin
   extend ::Dry::Monads::Result::Mixin::Constructors
   extend ::Dry::Monads::List::Mixin
@@ -8185,4 +8169,16 @@ module WidgetsInc
   def self.place_order(check_product_exists, check_address_exists, get_product_price, create_order_acknowledgement_order, send_order_acknowledgement); end
 
   def self.price_order(get_product_price); end
+
+  def self.to_address(); end
+
+  def self.to_customer_info(); end
+
+  def self.to_priced_order_line(get_product_price); end
+
+  def self.to_product_code(check_product_code_exists); end
+
+  def self.to_validated_order_line(); end
+
+  def self.validate_order(check_product_code_exists, check_address_exists); end
 end
